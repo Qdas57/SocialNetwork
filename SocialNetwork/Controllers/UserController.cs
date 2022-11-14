@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SocialNetwork.Models;
+using SocialNetwork.Services.Repositories;
 
 namespace SocialNetwork.Controllers
 {
@@ -6,32 +8,29 @@ namespace SocialNetwork.Controllers
     [Route("user")]
     public class UserController : ControllerBase
     {
-        private List<User> _users = new List<User>()
+        private readonly UserRepository _userRepository;
+
+        public UserController(UserRepository userRepository)
         {
-            new User()
+            _userRepository = userRepository;
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserInput newUser)
+        {
+            try
             {
-                Id = 1,
-                Name = "Mike"
-            },
-            new User()
-            {
-                Id = 2,
-                Name = "Alice"
-            },
-            new User()
-            {
-                Id = 3,
-                Name = "Alex"
+                var result = await _userRepository.RegisterUserAsync(newUser.FirstName, newUser.LastName, newUser.Email,
+                newUser.Password, newUser.Phone, newUser.Avatar, newUser.BirthDate);
+
+                return Ok(result);
             }
-        };
+            catch (Exception)
+            {
 
-        [HttpGet]
-        [Route("count")]
-        public async Task<ActionResult<int>> GetUserCountAsync()
-        {
-            await Task.Delay(3000);
-
-            return Ok(_users.Count);
+                throw;
+            }            
         }
     }
 }
