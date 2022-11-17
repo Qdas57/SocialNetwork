@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Data;
 using SocialNetwork.Services.Repositories;
+using SocialNetwork.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//AddSingleton AddScoped AddTransient ??
 builder.Services.AddTransient<UserRepository>();
+builder.Services.AddTransient<CommonService>();
 
 builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SocialNetwork")));
 
