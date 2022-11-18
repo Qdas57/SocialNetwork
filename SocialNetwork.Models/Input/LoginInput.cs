@@ -1,4 +1,4 @@
-﻿namespace SocialNetwork.Models
+﻿namespace SocialNetwork.Models.Input
 {
     public class LoginInput
     {

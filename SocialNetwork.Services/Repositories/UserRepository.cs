@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Data;
 using SocialNetwork.Data.Entities;
+using SocialNetwork.Models.Output;
 using SocialNetwork.Services.Services;
 
 namespace SocialNetwork.Services.Repositories
@@ -47,18 +48,31 @@ namespace SocialNetwork.Services.Repositories
             return await _db.Users.FirstOrDefaultAsync(u => u.Email == email) != null;
         }
 
-        public async Task<bool> LoginAsync(string email, string password)
+        public async Task<UserOutput> IdentityUserAsync(string email, string password)
         {
-            string hashPass = _commonService.GetHash(password);
-
-            var findedUser = await _db.Users.FirstOrDefaultAsync(u=>u.Email == email && u.Password == hashPass);
-
-            if (findedUser is null)
+            try
             {
-                return false;
-            }
+                string hashPass = _commonService.GetHash(password);
 
-            return true;
+                UserEntity? findedUser = await _db.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == hashPass);
+
+                if (findedUser is null)
+                {
+                    throw new Exception("Login failed");
+                }
+
+                return new UserOutput
+                { 
+                    UserId = findedUser.UserId,
+                    Email = findedUser.Email,
+                    FirstName = findedUser.FirstName
+                };
+            }
+            catch (Exception)
+            {
+                //TODO: Log
+                throw;
+            }            
         }
     }
 }

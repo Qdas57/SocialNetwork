@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
 {
@@ -30,6 +26,7 @@ namespace SocialNetwork.Services.Services
             return builder.ToString();
         }
         // методы в пару строк?
+        
         public static bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -71,11 +68,13 @@ namespace SocialNetwork.Services.Services
             }
         }
         
-
         public bool IsValidPassword(string password)
         {
+            char[] symbols = { };
+
             return !password.Contains(" ") || password.Contains("'") || password.Contains("\"") || password.Contains("/") || password.Contains(";") || password.Contains(":") || password.Contains(",") || password.Contains(".") || password.Contains("?") || password.Contains("") || password.Contains("|") || password.Contains("&") || password.Length < 5 || password.Length > 30;
         } // регулярка
+        
         public void DeclinationOfTheYear(int year, out string yearString)
         {
             int lastNumber = year % 10;
@@ -93,6 +92,7 @@ namespace SocialNetwork.Services.Services
                 yearString = "лет";
             }
         }
+        
         public void DeclinationOfTheMonth(int month, out string monthString)
         {
             int lastNumber = month % 10;
@@ -111,6 +111,7 @@ namespace SocialNetwork.Services.Services
             }
 
         }
+        
         public void DeclinationOfTheDay(int day, out string dayString)
         {
             int lastNumber = day % 10;
@@ -129,7 +130,6 @@ namespace SocialNetwork.Services.Services
             }
             
         }
-        // в 1 метод? принципы солид ( единая ответственность ) дни , месяцы, годы - разные сущности 
     }
 
 }

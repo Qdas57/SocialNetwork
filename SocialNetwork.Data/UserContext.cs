@@ -11,5 +11,7 @@ namespace SocialNetwork.Data
         }
 
         public DbSet<UserEntity> Users { get; set; }
+
+        public DbSet<RefreshTokenEntity> RefreshTokens { get; set; }
     }
 }

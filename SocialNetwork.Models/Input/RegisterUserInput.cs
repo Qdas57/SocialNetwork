@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SocialNetwork.Models
+namespace SocialNetwork.Models.Input
 {
     public class RegisterUserInput
     {

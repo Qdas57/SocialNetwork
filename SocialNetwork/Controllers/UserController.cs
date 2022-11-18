@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SocialNetwork.Models.Input;
 using SocialNetwork.Models.Output;
 using SocialNetwork.Services.Repositories;
+using SocialNetwork.Services.Services;
 
 namespace SocialNetwork.Controllers
 {
@@ -11,9 +13,12 @@ namespace SocialNetwork.Controllers
     {
         private readonly UserRepository _userRepository;
 
-        public UserController(UserRepository userRepository)
+        private readonly UserService _userService;
+
+        public UserController(UserRepository userRepository, UserService userService)
         {
             _userRepository = userRepository;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -46,9 +51,9 @@ namespace SocialNetwork.Controllers
         {
             try
             {
-                var status = await _userRepository.LoginAsync(loginInput.Email, loginInput.Password);
+                LoginResult? result = await _userService.AuthenticateUserAsync(loginInput.Email, loginInput.Password);
 
-                return Ok(status);
+                return Ok(result);
             }
             catch (Exception)
             {
@@ -58,6 +63,7 @@ namespace SocialNetwork.Controllers
 
         [HttpGet]
         [Route("profile-by-email")]
+        [Authorize]
         public async Task<IActionResult> GetProfileByEmailAsync(string email)
         {
             //1. Аутентифицирован ли пользователь oauth
