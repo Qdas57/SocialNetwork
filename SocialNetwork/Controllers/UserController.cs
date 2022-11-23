@@ -62,16 +62,13 @@ namespace SocialNetwork.Controllers
         }
 
         [HttpGet]
-        [Route("profile-by-email")]
+        [Route("profile-by-email")]     
         [Authorize]
         public async Task<IActionResult> GetProfileByEmailAsync(string email)
         {
-            //1. Аутентифицирован ли пользователь oauth
-            //2. Корректный ли емейл
-            //3. Поиск пользователя в БД
-            //4. Формирование выходной модели
-
             ProfileOutput profile = new ProfileOutput();
+
+            //TODO: имплементировать метод
 
             return Ok(profile);
         }

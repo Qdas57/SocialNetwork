@@ -77,6 +77,8 @@ namespace SocialNetwork.Services.Services
         
         public void DeclinationOfTheYear(int year, out string yearString)
         {
+            //TODO: вместо out -> return
+            //TODO: написать тесты
             int lastNumber = year % 10;
 
             if (lastNumber == 1)
