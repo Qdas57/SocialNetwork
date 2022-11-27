@@ -9,6 +9,7 @@ namespace SocialNetwork.Controllers
 {
     [ApiController]
     [Route("user")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly UserRepository _userRepository;
@@ -21,8 +22,14 @@ namespace SocialNetwork.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Ресгиструет новго пользователя.
+        /// </summary>
+        /// <param name="newUser">Модель пользователя.</param>
+        /// <returns>Результат регистрации.</returns>
         [HttpPost]
         [Route("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserInput newUser)
         {
             try
@@ -44,9 +51,10 @@ namespace SocialNetwork.Controllers
                 throw;
             }            
         }
-
+     
         [HttpPost]
         [Route("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginAsync([FromBody] LoginInput loginInput)
         {
             try
@@ -63,7 +71,7 @@ namespace SocialNetwork.Controllers
 
         [HttpGet]
         [Route("profile-by-email")]     
-        [Authorize]
+        
         public async Task<IActionResult> GetProfileByEmailAsync(string email)
         {
             ProfileOutput profile = new ProfileOutput();
