@@ -8,15 +8,15 @@ using SocialNetwork.Services.Services;
 namespace SocialNetwork.Controllers
 {
     [ApiController]
-    [Route("user")]
+    [Route("auth")]
     [Authorize]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly UserRepository _userRepository;
 
         private readonly UserService _userService;
 
-        public UserController(UserRepository userRepository, UserService userService)
+        public AuthController(UserRepository userRepository, UserService userService)
         {
             _userRepository = userRepository;
             _userService = userService;
@@ -34,7 +34,7 @@ namespace SocialNetwork.Controllers
         {
             try
             {
-                var status = await _userRepository.IsUserExistAsync(newUser.Email);
+                var status = await _userRepository.CheckEmailAsync(newUser.Email);
 
                 if (status)
                 {
@@ -49,9 +49,9 @@ namespace SocialNetwork.Controllers
             catch (Exception)
             {
                 throw;
-            }            
+            }
         }
-     
+
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -69,16 +69,13 @@ namespace SocialNetwork.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("profile-by-email")]     
-        
-        public async Task<IActionResult> GetProfileByEmailAsync(string email)
+        [HttpPost]
+        [Route("refresh-tokens")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshTokensAsync(string refreshToken)
         {
-            ProfileOutput profile = new ProfileOutput();
-
-            //TODO: имплементировать метод
-
-            return Ok(profile);
+            //TODO: implement
+            return Ok();
         }
     }
 }

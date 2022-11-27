@@ -14,6 +14,10 @@
 
         public DateTime BirthDate { get; set; }
 
+        public int Age { get; set; }
+
+        public string AgeDeclination { get; set; }
+
         /// <summary>
         /// Строка в формате: "На сервисе 5 лет, 1 месяц, 3 дня." или "На сервисе 1 месяц, 3 дня." или "На сервисе 3 дня." или "Зарегистрировался сегодня"
         /// </summary>

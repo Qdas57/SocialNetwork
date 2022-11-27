@@ -17,6 +17,7 @@ namespace SocialNetwork.Services.Services
         private UserRepository _userRepository;
 
         private RefreshTokenRepository _refreshTokenRepository;
+
         public UserService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository)
         {
             _userRepository = userRepository;

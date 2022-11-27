@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Core.Exceptions;
 using SocialNetwork.Data;
 using SocialNetwork.Data.Entities;
 using SocialNetwork.Models.Output;
@@ -43,7 +44,7 @@ namespace SocialNetwork.Services.Repositories
             return true;
         }
 
-        public async Task<bool> IsUserExistAsync(string email)
+        public async Task<bool> CheckEmailAsync(string email)
         {
             return await _db.Users.FirstOrDefaultAsync(u => u.Email == email) != null;
         }
@@ -65,7 +66,12 @@ namespace SocialNetwork.Services.Repositories
                 { 
                     UserId = findedUser.UserId,
                     Email = findedUser.Email,
-                    FirstName = findedUser.FirstName
+                    FirstName = findedUser.FirstName,
+                    LastName = findedUser.LastName,
+                    Phone = findedUser.Phone,
+                    Avatar = findedUser.Avatar,
+                    BirthDate = findedUser.BirthDate,
+                    RegisterDate = findedUser.RegisterDate
                 };
             }
             catch (Exception)
@@ -73,6 +79,36 @@ namespace SocialNetwork.Services.Repositories
                 //TODO: Log
                 throw;
             }            
+        }
+
+        public async Task<UserOutput> GetUserByIdAsync(Guid guid)
+        {
+            try
+            {
+                var findedUser = await _db.Users.FirstOrDefaultAsync(u => u.UserId == guid);
+
+                if (findedUser is null)
+                {
+                    throw new UserNotFoundException($"User with GUID - {guid} not found.");
+                }
+
+                return new UserOutput
+                {
+                    UserId = findedUser.UserId,
+                    Email = findedUser.Email,
+                    FirstName = findedUser.FirstName,
+                    LastName = findedUser.LastName,
+                    Phone = findedUser.Phone,
+                    Avatar = findedUser.Avatar,
+                    BirthDate = findedUser.BirthDate,
+                    RegisterDate = findedUser.RegisterDate
+                };
+            }
+            catch (Exception)
+            {
+                //TODO: log
+                throw;
+            }
         }
     }
 }

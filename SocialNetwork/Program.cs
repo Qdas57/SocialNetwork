@@ -12,6 +12,9 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//TODO
+//1. Mapping
+//2. Logging
 
 builder.Services.AddControllers();
 
@@ -42,6 +45,7 @@ builder.Services.AddTransient<UserRepository>();
 builder.Services.AddTransient<CommonService>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<RefreshTokenRepository>();
+builder.Services.AddTransient<ProfileService>();
 
 builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SocialNetwork")));
 
