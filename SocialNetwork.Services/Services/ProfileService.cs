@@ -1,7 +1,6 @@
 ﻿using SocialNetwork.Core.Exceptions;
 using SocialNetwork.Models.Output;
 using SocialNetwork.Services.Repositories;
-using System.IO;
 
 namespace SocialNetwork.Services.Services
 {
@@ -30,12 +29,9 @@ namespace SocialNetwork.Services.Services
 
                 var age = DateTime.Now.Year - findedUser.BirthDate.Year;
 
-                string ageDeclination = string.Empty;
+                string ageDeclination = _commonService.DeclinationOfTheYear(age);
 
-                _commonService.DeclinationOfTheYear(age, out ageDeclination);
-
-
-
+                string onservice = await _commonService.OnServiceAsync(findedUser.RegisterDate);
 
                 return new ProfileOutput
                 {
@@ -47,7 +43,7 @@ namespace SocialNetwork.Services.Services
                     BirthDate = findedUser.BirthDate,
                     Age = age,
                     AgeDeclination = ageDeclination,
-                    OnService = OnServiceAsync(guid)
+                    OnService = onservice
                 };
             }
             catch (Exception ex)
@@ -57,34 +53,6 @@ namespace SocialNetwork.Services.Services
                 return null;
             }
         }
-        //TODO: OnService нужно взять register date отнять DateTime.Now и посмотреть
-        public async Task<ProfileOutput> OnServiceAsync(Guid guid)
-        {
-            try
-            {
-                {
-                    var findedUser = await _userRepository.GetUserByIdAsync(guid);
-
-                    if (findedUser is null)
-                    {
-                        throw new UserNotFoundException($"User with GUID - {guid} not found.");
-                    }
-
-                    var ageOnService = findedUser.RegisterDate.Year - DateTime.Now.Year;
-
-                    string ageDeclination = string.Empty;
-
-                    _commonService.DeclinationOfTheYear(ageOnService, out ageDeclination);
-                }
-            }
-            catch (Exception ex)
-            {
-                // запись в файл ошибок
-                // 
-                string createText = ex + Environment.NewLine;
-                File.WriteAllText("ErrInService.txt", createText);
-                return null;
-            }
-        }
+                
     }
 }

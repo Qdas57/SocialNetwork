@@ -16,6 +16,12 @@ var builder = WebApplication.CreateBuilder(args);
 //1. Mapping
 //2. Logging
 
+
+//TODO: HOMEWORK
+//1. nlog
+//2. Писать логи в бд - создать сущность лога - создаём миграцию - настроить конфиг nlog
+//3. google, youtube
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();

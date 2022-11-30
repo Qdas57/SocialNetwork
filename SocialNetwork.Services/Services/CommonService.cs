@@ -77,10 +77,8 @@ namespace SocialNetwork.Services.Services
 
         public string DeclinationOfTheYear(int year)
         {
-            //TODO: + вместо out -> return 
-            //TODO: - написать тесты
-            // тесты на входные данные  DeclinationOfTheYear
-            
+            //TODO: переделать - меньше проверок use switch
+                        
             int lastNumber = year % 10;
 
             if (lastNumber == 1)
@@ -120,21 +118,62 @@ namespace SocialNetwork.Services.Services
 
         public string DeclinationOfTheDay(int day)
         {
-            int lastNumber = day % 10;
-
-            if (lastNumber == 1)
+            if (day < 0)
             {
-                return "день";
-            }
-            else if (lastNumber >= 2 && lastNumber <= 4)
-            {
-                return "дня";
-            }
-            else
-            {
-                return "дней";
+                throw new ArgumentException($"{nameof(day)} cannot be negative.", nameof(day));
             }
 
+            return (day % 10) switch
+            {
+                1 => "день",
+                >= 2 and <= 4 => "дня",
+                _ => "дней",
+            };
+        }
+
+        public async Task<string> OnServiceAsync(DateTime registerDate)
+        {
+            try
+            {
+                if (registerDate.Date == DateTime.Now.Date)
+                {
+                    return "Зарегистрировался сегодня.";
+                }
+
+                var timeSpanOnService = DateTime.Now.Date.Subtract(registerDate.Date);
+
+                int years = timeSpanOnService.Days / 365;
+                int months = (timeSpanOnService.Days % 365) / 30;
+                int days = (timeSpanOnService.Days % 365) % 30;
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append("На сервисе");
+
+                if (years > 0)
+                {
+                    sb.Append($" {years} {DeclinationOfTheYear(years)},");
+                }
+
+                if (months > 0)
+                {
+                    sb.Append($" {months} {DeclinationOfTheMonth(months)},");
+                }
+
+                if (days > 0)
+                {
+                    sb.Append($" {days} {DeclinationOfTheDay(days)}.");
+                }
+
+                return sb.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                string createText = ex + Environment.NewLine;
+                File.WriteAllText("ErrInService.txt", createText);
+                return null;
+            }
         }
     }
 
