@@ -26,7 +26,7 @@ namespace SocialNetwork.Services.Services
             return builder.ToString();
         }
         // методы в пару строк?
-        
+
         public static bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -67,70 +67,74 @@ namespace SocialNetwork.Services.Services
                 return false;
             }
         }
-        
+
         public bool IsValidPassword(string password)
         {
             char[] symbols = { };
 
             return !password.Contains(" ") || password.Contains("'") || password.Contains("\"") || password.Contains("/") || password.Contains(";") || password.Contains(":") || password.Contains(",") || password.Contains(".") || password.Contains("?") || password.Contains("") || password.Contains("|") || password.Contains("&") || password.Length < 5 || password.Length > 30;
-        } // регулярка
-        
-        public void DeclinationOfTheYear(int year, out string yearString)
+        } 
+
+        public string DeclinationOfTheYear(int year)
         {
-            //TODO: вместо out -> return
-            //TODO: написать тесты
+            //TODO: + вместо out -> return 
+            //TODO: - написать тесты
+            // тесты на входные данные  DeclinationOfTheYear
+            
             int lastNumber = year % 10;
 
             if (lastNumber == 1)
             {
-                yearString = "год";
+
+                return "год";
+
             }
             else if (lastNumber >= 2 && lastNumber <= 4)
             {
-                yearString = "года";
+                return "года";
             }
             else
             {
-                yearString = "лет";
+                return "лет";
             }
         }
-        
-        public void DeclinationOfTheMonth(int month, out string monthString)
+
+        public string DeclinationOfTheMonth(int month)
         {
             int lastNumber = month % 10;
 
             if (lastNumber == 1)
             {
-                monthString = "месяц";
+                return "месяц";
             }
             else if (lastNumber >= 2 && lastNumber <= 4)
             {
-                monthString = "месяца";
+                return "месяца";
             }
             else
             {
-                monthString = "месяцев";
+                return "месяцев";
             }
 
         }
-        
-        public void DeclinationOfTheDay(int day, out string dayString)
+
+        public string DeclinationOfTheDay(int day)
         {
             int lastNumber = day % 10;
 
             if (lastNumber == 1)
             {
-                dayString = "день";
+                return "день";
             }
             else if (lastNumber >= 2 && lastNumber <= 4)
             {
-                dayString = "дня";
+                return "дня";
             }
             else
             {
-                dayString = "дней";
+                return "дней";
             }
-            
+
         }
     }
 

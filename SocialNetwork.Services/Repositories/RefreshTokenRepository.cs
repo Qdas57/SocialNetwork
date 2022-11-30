@@ -5,6 +5,8 @@ using SocialNetwork.Models.Output;
 
 namespace SocialNetwork.Services.Repositories
 {
+    
+    
     public class RefreshTokenRepository
     {
         private UserContext _db;
@@ -36,8 +38,7 @@ namespace SocialNetwork.Services.Repositories
             }
             catch (Exception)
             {
-                //TODO: log
-                throw;
+                return false;
             }
         }
 
@@ -69,10 +70,11 @@ namespace SocialNetwork.Services.Repositories
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: log
-                throw;
+                string createText = ex + Environment.NewLine;
+                File.WriteAllText("ErrInCreateAsync.txt", createText);
+                return null;
             }
         }
 
@@ -99,11 +101,13 @@ namespace SocialNetwork.Services.Repositories
                     UserId = result.UserId
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: log
-                throw;
+                string createText = ex + Environment.NewLine;
+                File.WriteAllText("ErrInGetByTokenAsync.txt", createText);
+                return null;
             }
+           
         }
 
         /// <summary>
@@ -128,10 +132,11 @@ namespace SocialNetwork.Services.Repositories
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: log
-                throw;
+                string createText = ex + Environment.NewLine;
+                File.WriteAllText("ErrInDeleteAsync.txt", createText);
+                return false;
             }
         }
     }

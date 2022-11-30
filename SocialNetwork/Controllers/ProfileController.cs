@@ -57,10 +57,11 @@ namespace SocialNetwork.Controllers
             {
                 return Ok(new { message = ex.Message });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: log 
-                return StatusCode(500, new { message = "Something went wrong." });
+                string createText = ex + Environment.NewLine;
+                File("ErrInProfileController.txt", createText);
+                return null;
             }
         }
     }

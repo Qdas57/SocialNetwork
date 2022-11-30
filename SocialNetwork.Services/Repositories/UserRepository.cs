@@ -74,10 +74,11 @@ namespace SocialNetwork.Services.Repositories
                     RegisterDate = findedUser.RegisterDate
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: Log
-                throw;
+                string createText = ex + Environment.NewLine;
+                File.WriteAllText("ErrInCreateAsync.txt", createText);
+                return null;
             }            
         }
 
@@ -104,10 +105,11 @@ namespace SocialNetwork.Services.Repositories
                     RegisterDate = findedUser.RegisterDate
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: log
-                throw;
+                string createText = ex + Environment.NewLine;
+                File.WriteAllText("ErrInGetUserById.txt", createText);
+                return null; 
             }
         }
     }
