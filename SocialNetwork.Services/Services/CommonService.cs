@@ -73,46 +73,37 @@ namespace SocialNetwork.Services.Services
             char[] symbols = { };
 
             return !password.Contains(" ") || password.Contains("'") || password.Contains("\"") || password.Contains("/") || password.Contains(";") || password.Contains(":") || password.Contains(",") || password.Contains(".") || password.Contains("?") || password.Contains("") || password.Contains("|") || password.Contains("&") || password.Length < 5 || password.Length > 30;
-        } 
+        }
 
         public string DeclinationOfTheYear(int year)
         {
-            //TODO: переделать - меньше проверок use switch
-                        
-            int lastNumber = year % 10;
 
-            if (lastNumber == 1)
+            if (year < 0)
             {
+                throw new ArgumentException($"{nameof(year)}can't be less than 0");
+            }
+            return (year % 10) switch
+            {
+                1 => "год",
+                > 1 and < 5 => "года",
+                _ => "лет"
 
-                return "год";
+            };
+          }
 
-            }
-            else if (lastNumber >= 2 && lastNumber <= 4)
-            {
-                return "года";
-            }
-            else
-            {
-                return "лет";
-            }
-        }
 
         public string DeclinationOfTheMonth(int month)
         {
-            int lastNumber = month % 10;
-
-            if (lastNumber == 1)
+            if (month < 0)
             {
-                return "месяц";
+                throw new ArgumentException($"{nameof(month)} не может быть отрицательным");
             }
-            else if (lastNumber >= 2 && lastNumber <= 4)
+            return (month % 10) switch
             {
-                return "месяца";
-            }
-            else
-            {
-                return "месяцев";
-            }
+                1 => "месяц",
+                >= 2 and <= 4 => "месяца",
+                _ => "месяцев"
+            };
 
         }
 

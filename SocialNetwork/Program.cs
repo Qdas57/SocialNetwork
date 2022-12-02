@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog.Web;
 using SocialNetwork.Core;
 using SocialNetwork.Data;
 using SocialNetwork.Filters;
@@ -9,82 +10,114 @@ using SocialNetwork.Services.Repositories;
 using SocialNetwork.Services.Services;
 using System.Reflection;
 
-var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//TODO
-//1. Mapping
-//2. Logging
-
-
-//TODO: HOMEWORK
-//1. nlog
-//2. Писать логи в бд - создать сущность лога - создаём миграцию - настроить конфиг nlog
-//3. google, youtube
-
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen(c =>
+internal class Program
 {
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    private static void Main(string[] args)
     {
-        Name = "Bearer",
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme.",
-    });
+        var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        try
+        {
+            logger.Debug("Инициализация приложения...");
+            var builder = WebApplication.CreateBuilder(args);
 
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SocialNetwok", Version = "v1" });
+            // Add services to the container.
+            //TODO
+            //1. Mapping
+            //2. Logging
 
-    c.OperationFilter<AuthResponsesOperationFilter>();
 
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-});
+            //TODO: HOMEWORK
+            //1. nlog
+            //2. Писать логи в бд - создать сущность лога - создаём миграцию - настроить конфиг nlog
+            //3. google, youtube
 
-//AddSingleton AddScoped AddTransient ??
-builder.Services.AddTransient<UserRepository>();
-builder.Services.AddTransient<CommonService>();
-builder.Services.AddTransient<UserService>();
-builder.Services.AddTransient<RefreshTokenRepository>();
-builder.Services.AddTransient<ProfileService>();
+            builder.Services.AddControllers();
 
-builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SocialNetwork")));
+            builder.Services.AddEndpointsApiExplorer();
 
-var tokenValidationParams = new TokenValidationParameters
-{
-    ValidateIssuer = true,
-    ValidIssuer = AccessTokenOptions.ISSUER,
-    ValidateAudience = true,
-    ValidAudience = AccessTokenOptions.AUDIENCE,
-    ValidateLifetime = true,
-    IssuerSigningKey = AccessTokenOptions.GetSymmetricSecurityKey(),
-    ValidateIssuerSigningKey = true,
-    ClockSkew = TimeSpan.Zero
-};
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
-                    options.SaveToken = true;
-                    options.RequireHttpsMetadata = false;
-                    options.TokenValidationParameters = tokenValidationParams;                
+                    Name = "Bearer",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme.",
                 });
 
-var app = builder.Build();
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SocialNetwok", Version = "v1" });
 
-// Configure the HTTP request pipeline.
+                c.OperationFilter<AuthResponsesOperationFilter>();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+            });
 
-app.MapControllers();
+            //AddSingleton AddScoped AddTransient ??
+            builder.Services.AddTransient<UserRepository>();
+            builder.Services.AddTransient<CommonService>();
+            builder.Services.AddTransient<UserService>();
+            builder.Services.AddTransient<RefreshTokenRepository>();
+            builder.Services.AddTransient<ProfileService>();
 
-app.UseAuthentication();
-app.UseAuthorization();
+            builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SocialNetwork")));
 
-app.Run();
+            var tokenValidationParams = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = AccessTokenOptions.ISSUER,
+                ValidateAudience = true,
+                ValidAudience = AccessTokenOptions.AUDIENCE,
+                ValidateLifetime = true,
+                IssuerSigningKey = AccessTokenOptions.GetSymmetricSecurityKey(),
+                ValidateIssuerSigningKey = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(options =>
+                            {
+                                options.SaveToken = true;
+                                options.RequireHttpsMetadata = false;
+                                options.TokenValidationParameters = tokenValidationParams;
+                            });
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            app.MapControllers();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.Run();
+        }
+
+
+        
+        catch (Exception)
+        {
+            logger.Error("Закрытие программы");
+            
+
+        }
+        finally
+        {
+            NLog.LogManager.Shutdown();
+        }
+
+        
+        
+    }
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<RefreshTokenRepository>())
+                .UseNLog();
+}

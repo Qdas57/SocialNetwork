@@ -1,20 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SocialNetwork.Data;
 using SocialNetwork.Data.Entities;
 using SocialNetwork.Models.Output;
 
 namespace SocialNetwork.Services.Repositories
 {
-    
-    
+
+
     public class RefreshTokenRepository
     {
         private UserContext _db;
+        
+        private ILogger<RefreshTokenRepository> _logger;
+        
 
         public RefreshTokenRepository(UserContext db)
         {
             _db = db;
         }
+
+        public RefreshTokenRepository(ILogger<RefreshTokenRepository> logger)
+        {
+            _logger = logger;
+            logger.LogInformation("RefreshTokenRepository что-то делает");
+        }
+
 
         /// <summary>
         /// Метод удалит все рефреш токены пользователя по идентификатору пользователя.
@@ -23,6 +34,7 @@ namespace SocialNetwork.Services.Repositories
         /// <returns>Статус оперцаии.</returns>
         public async Task<bool> DeleteAllAsync(Guid userId)
         {
+            
             try
             {
                 List<RefreshTokenEntity> refreshTokens = await _db.RefreshTokens.Where(x => x.UserId == userId).ToListAsync();
@@ -117,6 +129,7 @@ namespace SocialNetwork.Services.Repositories
         /// <returns>Статус операции.</returns>
         public async Task<bool> DeleteAsync(long refreshTokenId)
         {
+
             try
             {
                 var deletedToken = await _db.RefreshTokens.FirstOrDefaultAsync(t=>t.RefreshTokenId == refreshTokenId);
