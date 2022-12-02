@@ -16,10 +16,13 @@ namespace SocialNetwork.Controllers
 
         private readonly UserService _userService;
 
-        public AuthController(UserRepository userRepository, UserService userService)
+        private ILogger<AuthController> _logger;
+
+        public AuthController(UserRepository userRepository, UserService userService, ILogger<AuthController> logger)
         {
             _userRepository = userRepository;
             _userService = userService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -38,6 +41,8 @@ namespace SocialNetwork.Controllers
 
                 if (status)
                 {
+                    _logger.LogInformation($"User with email {newUser.Email} already exists!");
+
                     return BadRequest(new { message = $"User with email {newUser.Email} already exists!" });
                 }
 
@@ -46,9 +51,11 @@ namespace SocialNetwork.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                _logger.LogError(e.Message);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = e.Message });
             }
         }
 
@@ -65,7 +72,9 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                throw;
+                _logger.LogError(e.Message);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = e.Message });
             }
         }
 
@@ -75,6 +84,7 @@ namespace SocialNetwork.Controllers
         public async Task<IActionResult> RefreshTokensAsync(string refreshToken)
         {
             //TODO: implement
+            _logger.LogInformation("test");
 
             return Ok();
         }

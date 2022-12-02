@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SocialNetwork.Data.Entities
 {
+    [Table("RefreshTokens", Schema = "dbo")]
     public class RefreshTokenEntity
     {
         /// <summary>

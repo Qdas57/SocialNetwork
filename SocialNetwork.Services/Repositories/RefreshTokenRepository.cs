@@ -13,17 +13,12 @@ namespace SocialNetwork.Services.Repositories
         private UserContext _db;
         
         private ILogger<RefreshTokenRepository> _logger;
-        
 
-        public RefreshTokenRepository(UserContext db)
-        {
-            _db = db;
-        }
-
-        public RefreshTokenRepository(ILogger<RefreshTokenRepository> logger)
+        public RefreshTokenRepository(ILogger<RefreshTokenRepository> logger, UserContext db)
         {
             _logger = logger;
-            logger.LogInformation("RefreshTokenRepository что-то делает");
+            logger.LogInformation("RefreshTokenRepository создался");
+            _db = db;
         }
 
 

@@ -1,0 +1,74 @@
+2022-12-02 18:49:43.0956 Info Message Template Auto Format enabled
+2022-12-02 18:49:43.1089 Info Loading assembly: NLog.Web.AspNetCore
+2022-12-02 18:49:43.1647 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create Target of type: Database
+ ---> System.ArgumentException: Target type-alias is unknown: 'Database'. Extension NLog.Database not included?
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.FactoryCreateInstance[T](String classType, INamedItemFactory`2 factory)
+   --- End of inner exception stack trace ---
+2022-12-02 18:49:43.2432 Info Registered target FileTarget(Name=allfile)
+2022-12-02 18:49:43.2623 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'sqlserver' not found for logging rule: *.
+2022-12-02 18:49:43.2919 Info Validating config: TargetNames=allfile, ConfigItems=17, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 18:49:43.3414 Info FileTarget(Name=allfile): Deleting old archive file: 'G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\logs\2022-12-02\nlog-all-2022-12-02.log'.
+2022-12-02 18:49:44.1605 Info Validating config: TargetNames=allfile, ConfigItems=17, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 18:51:40.4182 Info Message Template Auto Format enabled
+2022-12-02 18:51:40.4324 Info Loading assembly: NLog.Web.AspNetCore
+2022-12-02 18:51:40.6083 Info Registered target DatabaseTarget(Name=sqlserver)
+2022-12-02 18:51:40.6245 Info Registered target FileTarget(Name=allfile)
+2022-12-02 18:51:40.6801 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=36, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 18:51:40.8430 Info FileTarget(Name=allfile): Deleting old archive file: 'G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\logs\2022-12-02\nlog-all-2022-12-02.log'.
+2022-12-02 18:51:42.5875 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=36, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 18:59:26.6681 Info Message Template Auto Format enabled
+2022-12-02 18:59:26.6871 Info Loading assembly: NLog.Web.AspNetCore
+2022-12-02 18:59:26.8651 Info Registered target DatabaseTarget(Name=sqlserver)
+2022-12-02 18:59:26.8651 Info Registered target FileTarget(Name=allfile)
+2022-12-02 18:59:26.9167 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=37, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 18:59:27.0293 Info FileTarget(Name=allfile): Deleting old archive file: 'G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\logs\2022-12-02\nlog-all-2022-12-02.log'.
+2022-12-02 18:59:27.7451 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=37, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 18:59:27.7715 Warn Logger: Microsoft.Extensions.Hosting.Internal.ApplicationLifetime configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:27.7715 Warn Logger: Microsoft.Extensions.Hosting.Internal.Host configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:27.7715 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:27.8082 Warn Logger: Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:27.8714 Warn Logger: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderFactory configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.3917 Warn Logger: Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.3917 Warn Logger: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.4756 Warn Logger: Microsoft.AspNetCore.DataProtection.TypeForwardingActivator configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.4756 Warn Logger: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.4756 Warn Logger: Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngGcmAuthenticatedEncryptorFactory configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.4756 Warn Logger: Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.4756 Warn Logger: Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ManagedAuthenticatedEncryptorFactory configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.4756 Warn Logger: Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlEncryptor configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.4756 Warn Logger: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.Server.Kestrel configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.Server.Kestrel.BadRequests configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.Server.Kestrel.Connections configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.Server.Kestrel.Http2 configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5055 Warn Logger: Microsoft.AspNetCore.Server.Kestrel.Http3 configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5278 Warn Logger: Microsoft.AspNetCore.Hosting.Diagnostics configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.5746 Warn Logger: Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.6526 Warn Logger: Microsoft.AspNetCore.Routing.EndpointMiddleware configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.6740 Warn Logger: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.6805 Warn Logger: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.6805 Warn Logger: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.6805 Warn Logger: Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.6934 Warn Logger: Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:28.8165 Warn Logger: Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 18:59:31.3536 Warn Logger: Microsoft.AspNetCore.Routing.Matching.DfaMatcher configured with duplicate output to target: DatabaseTarget(Name=sqlserver). LoggingRule with NamePattern='Microsoft.*' and Level=Info has been skipped.
+2022-12-02 19:00:49.6813 Info Message Template Auto Format enabled
+2022-12-02 19:00:49.6990 Info Loading assembly: NLog.Web.AspNetCore
+2022-12-02 19:00:49.8679 Info Registered target DatabaseTarget(Name=sqlserver)
+2022-12-02 19:00:49.8819 Info Registered target FileTarget(Name=allfile)
+2022-12-02 19:00:49.9219 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=37, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 19:00:50.0363 Info FileTarget(Name=allfile): Deleting old archive file: 'G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\logs\2022-12-02\nlog-all-2022-12-02.log'.
+2022-12-02 19:00:50.7771 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=37, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 19:03:37.8006 Info Message Template Auto Format enabled
+2022-12-02 19:03:37.8224 Info Loading assembly: NLog.Web.AspNetCore
+2022-12-02 19:03:37.9906 Info Registered target DatabaseTarget(Name=sqlserver)
+2022-12-02 19:03:38.0054 Info Registered target FileTarget(Name=allfile)
+2022-12-02 19:03:38.0462 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=37, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
+2022-12-02 19:03:38.1873 Info FileTarget(Name=allfile): Deleting old archive file: 'G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\logs\2022-12-02\nlog-all-2022-12-02.log'.
+2022-12-02 19:03:38.9639 Info Validating config: TargetNames=allfile, sqlserver, ConfigItems=37, FilePath=G:\PROFI.PROJECTS\NET\SocialNetwork\SocialNetwork\bin\Debug\net6.0\nlog.config
