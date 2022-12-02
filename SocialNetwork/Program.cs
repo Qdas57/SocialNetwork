@@ -20,10 +20,8 @@ var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 try
 {
     logger.Debug("Инициализация приложения...");
+    
     var builder = WebApplication.CreateBuilder(args);
-
-    // Add services to the container.
-    //TODO
 
     builder.Services.AddControllers();
 
@@ -48,8 +46,7 @@ try
         var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
         c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
     });
-
-    //AddSingleton AddScoped AddTransient ??
+        
     builder.Services.AddTransient<UserRepository>();
     builder.Services.AddTransient<CommonService>();
     builder.Services.AddTransient<UserService>();
