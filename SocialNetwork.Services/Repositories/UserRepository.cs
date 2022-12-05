@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SocialNetwork.Core.Exceptions;
 using SocialNetwork.Data;
 using SocialNetwork.Data.Entities;
@@ -13,10 +14,13 @@ namespace SocialNetwork.Services.Repositories
 
         private readonly CommonService _commonService;
 
-        public UserRepository(UserContext db, CommonService commonService)
+        private ILogger<UserRepository> _logger;
+
+        public UserRepository(UserContext db, CommonService commonService, ILogger<UserRepository> logger)
         {
             _db = db;
             _commonService = commonService;
+            _logger = logger;
         }
 
         public async Task<bool> RegisterUserAsync(string firstName, string lastName, string email, string password,
@@ -63,7 +67,7 @@ namespace SocialNetwork.Services.Repositories
                 }
 
                 return new UserOutput
-                { 
+                {
                     UserId = findedUser.UserId,
                     Email = findedUser.Email,
                     FirstName = findedUser.FirstName,
@@ -79,7 +83,7 @@ namespace SocialNetwork.Services.Repositories
                 string createText = ex + Environment.NewLine;
                 File.WriteAllText("ErrInCreateAsync.txt", createText);
                 return null;
-            }            
+            }
         }
 
         public async Task<UserOutput> GetUserByIdAsync(Guid guid)
@@ -109,7 +113,35 @@ namespace SocialNetwork.Services.Repositories
             {
                 string createText = ex + Environment.NewLine;
                 File.WriteAllText("ErrInGetUserById.txt", createText);
-                return null; 
+                return null;
+            }
+        }
+
+        public async Task<List<UserOutput>> GetUsersAsync()
+        {
+
+            try
+            {
+                var users = await _db.Users
+                                .Select(u => new UserOutput
+                                {
+                                    UserId = u.UserId,
+                                    Email = u.Email,
+                                    FirstName = u.FirstName,
+                                    LastName = u.LastName,
+                                    Phone = u.Phone,
+                                    Avatar = u.Avatar,
+                                    BirthDate = u.BirthDate,
+                                    RegisterDate = u.RegisterDate
+                                })
+                                .ToListAsync();
+
+                return users;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
             }
         }
     }

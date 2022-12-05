@@ -1,5 +1,7 @@
-﻿using SocialNetwork.Core.Exceptions;
+﻿using Microsoft.Extensions.Logging;
+using SocialNetwork.Core.Exceptions;
 using SocialNetwork.Models.Output;
+using SocialNetwork.Services.Mapping;
 using SocialNetwork.Services.Repositories;
 
 namespace SocialNetwork.Services.Services
@@ -8,12 +10,12 @@ namespace SocialNetwork.Services.Services
     {
         private readonly UserRepository _userRepository;
 
-        private readonly CommonService _commonService;
+        private ILogger<ProfileService> _logger;
 
-        public ProfileService(UserRepository userRepository, CommonService commonService)
+        public ProfileService(UserRepository userRepository, ILogger<ProfileService> logger)
         {
             _userRepository = userRepository;
-            _commonService = commonService;
+            _logger = logger;
         }
 
         public async Task<ProfileOutput> GetProfileByIdAsync(Guid guid)
@@ -26,31 +28,28 @@ namespace SocialNetwork.Services.Services
                 {
                     throw new UserNotFoundException($"User with GUID - {guid} not found.");
                 }
-
-                var age = DateTime.Now.Year - findedUser.BirthDate.Year;
-
-                string ageDeclination = _commonService.DeclinationOfTheYear(age);
-
-                string onservice = await _commonService.OnServiceAsync(findedUser.RegisterDate);
-
-                return new ProfileOutput
-                {
-                    Email = findedUser.Email,
-                    FirstName = findedUser.FirstName,
-                    LastName = findedUser.LastName,
-                    Phone = findedUser.Phone,
-                    Avatar = findedUser.Avatar,
-                    BirthDate = findedUser.BirthDate,
-                    Age = age,
-                    AgeDeclination = ageDeclination,
-                    OnService = onservice
-                };
+                
+                return findedUser.ToProfileOutput();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                string createText = ex + Environment.NewLine;
-                File.WriteAllText("ErrInGetProfile.txt", createText);
-                return null;
+                _logger.LogError(e.Message);
+                throw;
+            }
+        }
+
+        public async Task<List<ProfileOutput>> GetAllUsersAsync()
+        {
+            try
+            {
+                var result = await _userRepository.GetUsersAsync();
+
+                return result.Select(x => x.ToProfileOutput()).ToList();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
             }
         }
                 

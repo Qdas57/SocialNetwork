@@ -16,9 +16,12 @@ namespace SocialNetwork.Controllers
     {
         private readonly ProfileService _profileService;
 
-        public ProfileController(ProfileService profileService)
+        private ILogger<ProfileController> _logger;
+
+        public ProfileController(ProfileService profileService, ILogger<ProfileController> logger)
         {
             _profileService = profileService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -53,15 +56,31 @@ namespace SocialNetwork.Controllers
 
                 return Ok(profile);
             }
-            catch (UserNotFoundException ex)
+            catch (Exception ex)
             {
-                return Ok(new { message = ex.Message });
+                _logger.LogError(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("all")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(List<ProfileOutput>), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetAllProfilesAsync()
+        {
+            try
+            {
+                var result = await _profileService.GetAllUsersAsync();
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                string createText = ex + Environment.NewLine;
-                File("ErrInProfileController.txt", createText);
-                return null;
+                _logger.LogError(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
             }
         }
     }

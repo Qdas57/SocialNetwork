@@ -6,13 +6,11 @@
 
         public string LastName { get; set; }
 
-        public string Email { get; set; }
-
         public string? Phone { get; set; }
 
         public string? Avatar { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
 
         /// <summary>
         /// Строка в формате: "На сервисе 5 лет, 1 месяц, 3 дня." или "На сервисе 1 месяц, 3 дня." или "На сервисе 3 дня." или "Зарегистрировался сегодня"

@@ -122,7 +122,7 @@ namespace SocialNetwork.Services.Services
             };
         }
 
-        public async Task<string> OnServiceAsync(DateTime registerDate)
+        public string OnService(DateTime registerDate)
         {
             try
             {

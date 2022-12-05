@@ -70,7 +70,7 @@ namespace SocialNetwork.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 _logger.LogError(e.Message);
 
