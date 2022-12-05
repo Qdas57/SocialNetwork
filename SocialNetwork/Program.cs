@@ -12,8 +12,8 @@ using System.Reflection;
 
 
 //TODO:
-//1. Logging - connection string из appsettings.json
-//2. Mapping - почитать что такое мапперы, зачем они, AutoMapper. Как его установить, как его использовать
+//1. Везде добавить логи
+//2. UserEntity < - > UserOutput  < - > ProfileOutput - мапперы ( или методы расширения или автомаппер)
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
