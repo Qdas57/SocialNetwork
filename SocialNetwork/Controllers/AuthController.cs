@@ -84,9 +84,9 @@ namespace SocialNetwork.Controllers
         public async Task<IActionResult> RefreshTokensAsync(string refreshToken)
         {
             //TODO: implement
-            _logger.LogInformation("test");
+            _logger.LogInformation("Not implemented yet");
 
-            return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Not implemented yet" });
         }
     }
 }

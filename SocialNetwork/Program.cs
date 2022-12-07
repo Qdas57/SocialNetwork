@@ -12,9 +12,8 @@ using SocialNetwork.Services.Services;
 using System.Reflection;
 
 
-//TODO:
-//1. Везде добавить логи + 
-//2. UserEntity < - > UserOutput  < - > ProfileOutput - мапперы ( или методы расширения или автомаппер)
+//TODO: 
+//2. UserEntity <- UserOutput  <-> ProfileOutput - automapper
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
