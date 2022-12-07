@@ -12,7 +12,7 @@ using System.Reflection;
 
 
 //TODO:
-//1. Везде добавить логи
+//1. Везде добавить логи + 
 //2. UserEntity < - > UserOutput  < - > ProfileOutput - мапперы ( или методы расширения или автомаппер)
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();

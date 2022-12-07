@@ -43,10 +43,12 @@ namespace SocialNetwork.Services.Repositories
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return false;
             }
+ 
         }
 
         /// <summary>
@@ -79,9 +81,8 @@ namespace SocialNetwork.Services.Repositories
             }
             catch (Exception ex)
             {
-                string createText = ex + Environment.NewLine;
-                File.WriteAllText("ErrInCreateAsync.txt", createText);
-                return null;
+                _logger.LogError(ex.Message);
+                throw;
             }
         }
 
@@ -110,9 +111,8 @@ namespace SocialNetwork.Services.Repositories
             }
             catch (Exception ex)
             {
-                string createText = ex + Environment.NewLine;
-                File.WriteAllText("ErrInGetByTokenAsync.txt", createText);
-                return null;
+                _logger.LogError(ex.Message);
+                throw;
             }
            
         }
@@ -142,9 +142,8 @@ namespace SocialNetwork.Services.Repositories
             }
             catch (Exception ex)
             {
-                string createText = ex + Environment.NewLine;
-                File.WriteAllText("ErrInDeleteAsync.txt", createText);
-                return false;
+                _logger.LogError(ex.Message);
+                throw;
             }
         }
     }
