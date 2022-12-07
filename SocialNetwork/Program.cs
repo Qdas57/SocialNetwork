@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
 using SocialNetwork.Core;
+using SocialNetwork.Core.MapperProfile;
 using SocialNetwork.Data;
 using SocialNetwork.Filters;
 using SocialNetwork.Services.Repositories;
@@ -76,6 +77,8 @@ try
                     });
 
     builder.Host.UseNLog();
+
+    builder.Services.AddAutoMapper(typeof(UserEntityToUserOutputProfile));
 
     var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SocialNetwork.Core.Exceptions;
 using SocialNetwork.Data;
@@ -16,11 +17,14 @@ namespace SocialNetwork.Services.Repositories
 
         private ILogger<UserRepository> _logger;
 
-        public UserRepository(UserContext db, CommonService commonService, ILogger<UserRepository> logger)
+        private readonly IMapper _mapper;
+
+        public UserRepository(UserContext db, CommonService commonService, ILogger<UserRepository> logger, IMapper mapper = null)
         {
             _db = db;
             _commonService = commonService;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<bool> RegisterUserAsync(string firstName, string lastName, string email, string password,
@@ -66,17 +70,7 @@ namespace SocialNetwork.Services.Repositories
                     throw new Exception("Login failed");
                 }
 
-                return new UserOutput
-                {
-                    UserId = findedUser.UserId,
-                    Email = findedUser.Email,
-                    FirstName = findedUser.FirstName,
-                    LastName = findedUser.LastName,
-                    Phone = findedUser.Phone,
-                    Avatar = findedUser.Avatar,
-                    BirthDate = findedUser.BirthDate,
-                    RegisterDate = findedUser.RegisterDate
-                };
+                return _mapper.Map<UserOutput>(findedUser);
             }
             catch (Exception ex)
             {
@@ -96,17 +90,7 @@ namespace SocialNetwork.Services.Repositories
                     throw new UserNotFoundException($"User with GUID - {guid} not found.");
                 }
 
-                return new UserOutput
-                {
-                    UserId = findedUser.UserId,
-                    Email = findedUser.Email,
-                    FirstName = findedUser.FirstName,
-                    LastName = findedUser.LastName,
-                    Phone = findedUser.Phone,
-                    Avatar = findedUser.Avatar,
-                    BirthDate = findedUser.BirthDate,
-                    RegisterDate = findedUser.RegisterDate
-                };
+                return _mapper.Map<UserOutput>(findedUser);
             }
             catch (Exception ex)
             {
@@ -120,21 +104,9 @@ namespace SocialNetwork.Services.Repositories
 
             try
             {
-                var users = await _db.Users
-                                .Select(u => new UserOutput
-                                {
-                                    UserId = u.UserId,
-                                    Email = u.Email,
-                                    FirstName = u.FirstName,
-                                    LastName = u.LastName,
-                                    Phone = u.Phone,
-                                    Avatar = u.Avatar,
-                                    BirthDate = u.BirthDate,
-                                    RegisterDate = u.RegisterDate
-                                })
-                                .ToListAsync();
+                var users = await _db.Users.ToListAsync();
 
-                return users;
+                return _mapper.Map<List<UserOutput>>(users);
             }
             catch (Exception e)
             {
