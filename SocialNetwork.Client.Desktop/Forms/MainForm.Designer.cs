@@ -215,10 +215,9 @@
             this.label_CountUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(161)))), ((int)(((byte)(176)))));
             this.label_CountUsers.Location = new System.Drawing.Point(233, 104);
             this.label_CountUsers.Name = "label_CountUsers";
-            this.label_CountUsers.Size = new System.Drawing.Size(362, 15);
+            this.label_CountUsers.Size = new System.Drawing.Size(212, 15);
             this.label_CountUsers.TabIndex = 9;
-            this.label_CountUsers.Text = "Сейчас на сервисе: allProfilesLabel_Show().ToString()\r\n";
-            /*this.label_CountUsers.Click += new System.EventHandler(this.label_CountUsers_Click);*/
+            this.label_CountUsers.Text = "Сейчас на сервисе:  ...считаем";
             // 
             // MainForm
             // 

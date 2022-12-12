@@ -83,5 +83,24 @@ namespace SocialNetwork.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("count")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetCountProfilesAsync()
+        {
+            try
+            {
+                return Ok(666);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
+        }
     }
 }

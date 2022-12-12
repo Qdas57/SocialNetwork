@@ -1,24 +1,12 @@
-﻿using RestSharp;
-using SocialNetwork.Client.Desktop.Configuration;
-using SocialNetwork.Models.Output;
-using System.Data;
+﻿using SocialNetwork.Client.Desktop.Services;
 using System.Runtime.InteropServices;
 
 namespace SocialNetwork.Client.Desktop.Forms
 {
     public partial class MainForm : Form
     {
+        private readonly ProfileService _profileService;
 
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-           (
-               int nLeftRect,    
-               int nTopRect,     
-               int nRightRect,   
-               int nBottomRect,  
-               int nWidthEllipse, 
-               int nHeightEllipse 
-           );
         public MainForm()
         {
             InitializeComponent();
@@ -28,22 +16,14 @@ namespace SocialNetwork.Client.Desktop.Forms
             pnlNavigation.Left = btn_Dashboard.Left;
             btn_Dashboard.BackColor = Color.FromArgb(60, 63, 69);
 
-        }
-        private void allProfilesLabel_Show()
-        {
-            var client = new RestClient(AppConfiguration.Host);
-
-            var request = new RestRequest("profile/all");
-
-            List<ProfileOutput>? response = client.Get<List<ProfileOutput>>(request);
-
-            string text = string.Join('\n', response.Select(u => u.OnService).ToList());
-
+            _profileService = new ProfileService();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
+            var count = await _profileService.GetCountProfilesAsync();
 
+            label_CountUsers.Text = $"Сейчас на сервисе: {count}";
         }
 
         private void btn_Dashboard_Click(object sender, EventArgs e)
@@ -128,5 +108,17 @@ namespace SocialNetwork.Client.Desktop.Forms
         {
 
         }*/
+
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+           (
+               int nLeftRect,
+               int nTopRect,
+               int nRightRect,
+               int nBottomRect,
+               int nWidthEllipse,
+               int nHeightEllipse
+           );
     }
 }
