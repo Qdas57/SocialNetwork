@@ -42,6 +42,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label_Dashboard = new System.Windows.Forms.Label();
             this.label_CountUsers = new System.Windows.Forms.Label();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.registerButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -219,11 +221,32 @@
             this.label_CountUsers.TabIndex = 9;
             this.label_CountUsers.Text = "Сейчас на сервисе:  ...считаем";
             // 
+            // loginButton
+            // 
+            this.loginButton.Location = new System.Drawing.Point(365, 249);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(285, 44);
+            this.loginButton.TabIndex = 10;
+            this.loginButton.Text = "Войти";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // registerButton
+            // 
+            this.registerButton.Location = new System.Drawing.Point(365, 314);
+            this.registerButton.Name = "registerButton";
+            this.registerButton.Size = new System.Drawing.Size(285, 40);
+            this.registerButton.TabIndex = 11;
+            this.registerButton.Text = "Создать аккаунт";
+            this.registerButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(951, 577);
+            this.Controls.Add(this.registerButton);
+            this.Controls.Add(this.loginButton);
             this.Controls.Add(this.label_CountUsers);
             this.Controls.Add(this.label_Dashboard);
             this.Controls.Add(this.panel1);
@@ -259,5 +282,7 @@
         private PictureBox pictureBox1;
         private Label label_Dashboard;
         private Label label_CountUsers;
+        private Button loginButton;
+        private Button registerButton;
     }
 }

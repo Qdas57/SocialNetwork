@@ -15,5 +15,7 @@ namespace SocialNetwork.Data
         public DbSet<RefreshTokenEntity> RefreshTokens { get; set; }
 
         public DbSet<LogEntity> Logs { get; set; }
+
+        //TODO: инициализировать БД(инмемори) данными
     }
 }

@@ -53,7 +53,10 @@ try
     builder.Services.AddTransient<RefreshTokenRepository>();
     builder.Services.AddTransient<ProfileService>();
 
+    //TODO: UseInMemory
     builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SocialNetwork")));
+
+    //builder.Services.AddDbContext<UserContext>(options => options.UseInMemoryDatabase("SocialNetwork"));
 
     var tokenValidationParams = new TokenValidationParameters
     {

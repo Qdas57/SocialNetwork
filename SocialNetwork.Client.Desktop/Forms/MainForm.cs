@@ -1,4 +1,5 @@
-﻿using SocialNetwork.Client.Desktop.Services;
+﻿using SocialNetwork.Client.Desktop.Model;
+using SocialNetwork.Client.Desktop.Services;
 using System.Runtime.InteropServices;
 
 namespace SocialNetwork.Client.Desktop.Forms
@@ -6,6 +7,8 @@ namespace SocialNetwork.Client.Desktop.Forms
     public partial class MainForm : Form
     {
         private readonly ProfileService _profileService;
+
+        private AuthResult authResult;
 
         public MainForm()
         {
@@ -17,13 +20,21 @@ namespace SocialNetwork.Client.Desktop.Forms
             btn_Dashboard.BackColor = Color.FromArgb(60, 63, 69);
 
             _profileService = new ProfileService();
+
+            btn_Chat.Visible = false;
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            var count = await _profileService.GetCountProfilesAsync();
+            try
+            {
+                var count = await _profileService.GetCountProfilesAsync();
 
-            label_CountUsers.Text = $"Сейчас на сервисе: {count}";
+                label_CountUsers.Text = $"Сейчас на сервисе: {count}";
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void btn_Dashboard_Click(object sender, EventArgs e)
@@ -120,5 +131,31 @@ namespace SocialNetwork.Client.Desktop.Forms
                int nWidthEllipse,
                int nHeightEllipse
            );
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+
+            loginForm.ShowDialog(); // return authResult
+
+            //TODO: получаем токены из формы и кладем в authResult;
+
+            if (true)
+            {
+                authResult = new AuthResult()
+                {
+                    Status = true,
+                    AccessToken = "...",
+                    RefreshToken = "...",
+                    Role = "достали из клеймов"
+                };
+
+                btn_Chat.Visible = true;
+            }
+            else
+            {
+
+            }
+        }
     }
 }
