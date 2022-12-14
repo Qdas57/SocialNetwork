@@ -44,6 +44,7 @@
             this.label_CountUsers = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
             this.registerButton = new System.Windows.Forms.Button();
+            this.btn_Exit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -240,11 +241,26 @@
             this.registerButton.Text = "Создать аккаунт";
             this.registerButton.UseVisualStyleBackColor = true;
             // 
+            // btn_Exit
+            // 
+            this.btn_Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btn_Exit.FlatAppearance.BorderSize = 0;
+            this.btn_Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Exit.ForeColor = System.Drawing.Color.White;
+            this.btn_Exit.Location = new System.Drawing.Point(914, 12);
+            this.btn_Exit.Name = "btn_Exit";
+            this.btn_Exit.Size = new System.Drawing.Size(25, 25);
+            this.btn_Exit.TabIndex = 8;
+            this.btn_Exit.Text = "X";
+            this.btn_Exit.UseVisualStyleBackColor = false;
+            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
+            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(951, 577);
+            this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.registerButton);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.label_CountUsers);
@@ -284,5 +300,6 @@
         private Label label_CountUsers;
         private Button loginButton;
         private Button registerButton;
+        private Button btn_Exit;
     }
 }

@@ -81,38 +81,38 @@ namespace SocialNetwork.Client.Desktop.Forms
         {
             pnlNavigation.Height = btn_Settings.Height;
             pnlNavigation.Top = btn_Settings.Top;
-            btn_Settings.BackColor = Color.FromArgb(142, 145, 170);
+            btn_Settings.BackColor = Color.FromArgb(60, 63, 69);
 
         }
 
         private void btn_Dashboard_Leave(object sender, EventArgs e)
         {
-            btn_Settings.BackColor = Color.FromArgb(142, 145, 149);
+            btn_Dashboard.BackColor = Color.FromArgb(54, 57, 63);
         }
 
         private void btn_Analytics_Leave(object sender, EventArgs e)
         {
-            btn_Settings.BackColor = Color.FromArgb(142, 145, 149);
+            btn_Analytics.BackColor = Color.FromArgb(54, 57, 63);
         }
 
         private void btn_Chat_Leave(object sender, EventArgs e)
         {
-            btn_Settings.BackColor = Color.FromArgb(142, 145, 149);
+            btn_Chat.BackColor = Color.FromArgb(54, 57, 63);
         }
 
         private void btn_Contact_Leave(object sender, EventArgs e)
         {
-            btn_Settings.BackColor = Color.FromArgb(142, 145, 149);
+            btn_Contact.BackColor = Color.FromArgb(54, 57, 63);
         }
 
         private void btn_FAQ_Leave(object sender, EventArgs e)
         {
-            btn_Settings.BackColor = Color.FromArgb(142, 145, 149);
+            btn_FAQ.BackColor = Color.FromArgb(54, 57, 63);
         }
 
         private void btn_Settings_Leave(object sender, EventArgs e)
         {
-            btn_Settings.BackColor = Color.FromArgb(142, 145, 149);
+            btn_Settings.BackColor = Color.FromArgb(54, 57, 63);
         }
 
         /*private void label_CountUsers_Click(object sender, EventArgs e)
@@ -156,6 +156,11 @@ namespace SocialNetwork.Client.Desktop.Forms
             {
 
             }
+        }
+
+        private void btn_Exit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
